@@ -75,4 +75,5 @@ możesz pracować razem z kursem, eksperymentując ze swoim kodem a jednocześni
  
  ## Zaczynamy
  
- Zacznij od pierwszej lekcji, tj. od gałęzi **1_1_begin**. Życzę owocnej nauki!
+ Zacznij od pierwszej lekcji trzeciego rozdziału, tj. od gałęzi **3_1_begin**. 
+ Życzę owocnej nauki!
