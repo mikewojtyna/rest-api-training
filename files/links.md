@@ -13,6 +13,13 @@ https://reqres.in/
 
 https://developer.github.com/v3/
 
+### curl
+
+Prosty program konsolowy, który umożliwia wykonywanie requestów do serwisów 
+REST.
+
+https://curl.haxx.se
+
 ### Postman
 
 Klient REST, przydatny do zabawy i testowania serwisów REST.
