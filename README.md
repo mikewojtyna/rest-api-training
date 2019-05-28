@@ -39,11 +39,7 @@ możesz pracować razem z kursem, eksperymentując ze swoim kodem a jednocześni
  
  ## Uruchamianie i testowanie projektu
  
- Aby uruchomić projekt wystarczy sklonować go ze zdalnego repozytorium:
- 
- `git clone <link_to_remote_repository>`
- 
- a następnie wykonać komendę programu Maven będąc w katalogu projektu:
+ Aby uruchomić projekt wystarczy wykonać komendę programu Maven będąc w katalogu projektu:
  
  Gdy używasz systemu Linux `./mvnw spring-boot:run`.
  
