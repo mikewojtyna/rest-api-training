@@ -1,4 +1,4 @@
-package pl.strefakursow.restapi;
+package pl.strefakursow.restapi.document;
 
 public class Document {
 	private String title;

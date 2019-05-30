@@ -1,4 +1,4 @@
-package pl.strefakursow.restapi;
+package pl.strefakursow.restapi.document;
 
 import org.springframework.web.bind.annotation.*;
 
