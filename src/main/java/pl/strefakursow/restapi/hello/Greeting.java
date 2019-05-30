@@ -1,4 +1,4 @@
-package pl.strefakursow.restapi;
+package pl.strefakursow.restapi.hello;
 
 public class Greeting {
 	private String msg;
