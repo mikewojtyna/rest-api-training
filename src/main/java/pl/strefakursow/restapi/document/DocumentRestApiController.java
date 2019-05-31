@@ -13,6 +13,29 @@ public class DocumentRestApiController {
 
 	private Collection<Document> documents = new ArrayList<>();
 
+	@PatchMapping("/{number}")
+	public void updateDocument(@PathVariable long number,
+				   @RequestBody Document newPartialDocument) {
+		findDocumentByNumber(number).ifPresent(document -> {
+			if (newPartialDocument.getTitle() != null) {
+				document.setTitle(newPartialDocument
+					.getTitle());
+			}
+			if (newPartialDocument.getTags() != null) {
+				document.setTags(newPartialDocument.getTags());
+			}
+		});
+	}
+
+	@PutMapping("/{number}")
+	public void replaceDocument(@PathVariable long number,
+				    @RequestBody Document newDocument) {
+		findDocumentByNumber(number).ifPresent(document -> {
+			document.setTitle(newDocument.getTitle());
+			document.setTags(newDocument.getTags());
+		});
+	}
+
 	@GetMapping
 	public Iterable<Document> getDocuments() {
 		return documents;
