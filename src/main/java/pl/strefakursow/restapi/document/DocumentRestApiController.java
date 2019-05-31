@@ -20,15 +20,12 @@ public class DocumentRestApiController {
 
 	@GetMapping("/{number}/title")
 	public Optional<String> getTitleOfDocument(@PathVariable long number) {
-		return documents.stream()
-			.filter(document -> document.getNumber() == number)
-			.findAny().map(Document::getTitle);
+		return findDocumentByNumber(number).map(Document::getTitle);
 	}
 
 	@GetMapping("/{number}")
 	public Optional<Document> getDocument(@PathVariable long number) {
-		return documents.stream()
-			.filter(doc -> doc.getNumber() == number).findAny();
+		return findDocumentByNumber(number);
 	}
 
 	@PostMapping
@@ -40,9 +37,13 @@ public class DocumentRestApiController {
 		MediaType.TEXT_PLAIN_VALUE)
 	public void addTag(@PathVariable long documentNumber,
 			   @RequestBody String tag) {
-		documents.stream()
-			.filter(doc -> doc.getNumber() == documentNumber)
-			.findAny()
+		findDocumentByNumber(documentNumber)
 			.ifPresent(document -> document.getTags().add(tag));
+	}
+
+	private Optional<Document> findDocumentByNumber(long number) {
+		return documents.stream()
+			.filter(document -> document.getNumber() == number)
+			.findAny();
 	}
 }
