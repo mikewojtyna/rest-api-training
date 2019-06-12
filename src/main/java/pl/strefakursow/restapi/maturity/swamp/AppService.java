@@ -1,4 +1,4 @@
-package pl.strefakursow.restapi.swamp;
+package pl.strefakursow.restapi.maturity.swamp;
 
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
@@ -8,13 +8,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.strefakursow.restapi.document.Document;
+import pl.strefakursow.restapi.maturity.util.DataFixtureUtils;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 @RestController
-@RequestMapping("/api/service")
+@RequestMapping("/api/maturity/service")
 public class AppService {
 
 	private List<Document> documents = initDocuments();
@@ -51,25 +50,12 @@ public class AppService {
 		}
 	}
 
-	private List<? extends Object> allProfiles() {
-		return List
-			.of(new Profile("goobar"), new Profile("foobar"),
-				new Profile("hoobar"));
-	}
-
-	private Document documentWithTitle(String documentTitle) {
-		Document document = new Document(documentTitle);
-		document.setNumber(new Random().nextLong());
-		document.setTags(List.of("tag0", "tag1", "tag2"));
-		return document;
+	private List<Profile> allProfiles() {
+		return DataFixtureUtils.allProfiles();
 	}
 
 	private List<Document> initDocuments() {
-		ArrayList<Document> documents = new ArrayList<>();
-		documents.add(documentWithTitle("doc0"));
-		documents.add(documentWithTitle("doc1"));
-		documents.add(documentWithTitle("doc2"));
-		return documents;
+		return DataFixtureUtils.initDocuments();
 	}
 
 }

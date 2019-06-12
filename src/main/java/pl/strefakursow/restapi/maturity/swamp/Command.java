@@ -1,4 +1,4 @@
-package pl.strefakursow.restapi.swamp;
+package pl.strefakursow.restapi.maturity.swamp;
 
 import pl.strefakursow.restapi.document.Document;
 
