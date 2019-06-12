@@ -1,5 +1,7 @@
 package pl.strefakursow.restapi.swamp;
 
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,7 +20,7 @@ public class AppService {
 	private List<Document> documents = initDocuments();
 
 	@PostMapping
-	public ResponseEntity<List<? extends Object>> handleCommand(@RequestBody Command command) {
+	public ResponseEntity<Object> handleCommand(@RequestBody Command command) {
 		if ("getAllDocuments".equals(command.getAction())) {
 			return ResponseEntity.ok(documents);
 		}
@@ -33,6 +35,16 @@ public class AppService {
 		}
 		else if ("getAllProfiles".equals(command.getAction())) {
 			return ResponseEntity.ok(allProfiles());
+		}
+		else if ("downloadFile".equals(command.getAction())) {
+			return ResponseEntity.ok()
+				.contentType(MediaType.IMAGE_PNG)
+				.body(new ClassPathResource("/images/image" +
+					".png", getClass()));
+		}
+		else if ("managePermissions".equals(command.getAction())) {
+			// TODO: change permissions
+			return ResponseEntity.ok().build();
 		}
 		else {
 			throw new IllegalArgumentException("Unknown action");
