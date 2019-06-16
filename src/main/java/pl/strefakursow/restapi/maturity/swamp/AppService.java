@@ -13,9 +13,8 @@ import pl.strefakursow.restapi.maturity.util.DataFixtureUtils;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/maturity/service")
+@RequestMapping("/api/maturity/l0/service")
 public class AppService {
-
 	private List<Document> documents = initDocuments();
 
 	@PostMapping
@@ -57,5 +56,4 @@ public class AppService {
 	private List<Document> initDocuments() {
 		return DataFixtureUtils.initDocuments();
 	}
-
 }

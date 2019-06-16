@@ -9,7 +9,6 @@ import java.util.List;
 @RestController("documentServiceL2")
 @RequestMapping("/api/maturity/l2/documents")
 public class DocumentService {
-
 	private List<Document> documents =
 		DataFixtureUtils.initDocuments();
 
