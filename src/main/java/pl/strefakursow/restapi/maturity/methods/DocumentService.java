@@ -1,5 +1,7 @@
 package pl.strefakursow.restapi.maturity.methods;
 
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.strefakursow.restapi.document.Document;
 import pl.strefakursow.restapi.maturity.util.DataFixtureUtils;
@@ -13,8 +15,16 @@ public class DocumentService {
 		DataFixtureUtils.initDocuments();
 
 	@GetMapping
-	public List<Document> getAllDocuments() {
-		return documents;
+	public ResponseEntity<List<Document>> getAllDocuments() {
+		return ResponseEntity.ok().header("Cache-Control", "max-age" +
+			"=3600").body(documents);
+	}
+
+	@GetMapping(produces = MediaType.TEXT_PLAIN_VALUE)
+	public String getAllTitles() {
+		return documents.stream().map(Document::getTitle).reduce((acc
+			,curr) -> String.join(",", acc, curr
+		)).orElse("");
 	}
 
 	@PostMapping
