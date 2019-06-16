@@ -7,24 +7,28 @@ import pl.strefakursow.restapi.document.Document;
 import pl.strefakursow.restapi.maturity.util.DataFixtureUtils;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController("documentServiceL2")
 @RequestMapping("/api/maturity/l2/documents")
 public class DocumentService {
-	private List<Document> documents =
-		DataFixtureUtils.initDocuments();
+	private List<Document> documents = DataFixtureUtils.initDocuments();
 
-	@GetMapping
-	public ResponseEntity<List<Document>> getAllDocuments() {
-		return ResponseEntity.ok().header("Cache-Control", "max-age" +
-			"=3600").body(documents);
+	@GetMapping(params = {"title", "number"})
+	public ResponseEntity<List<Document>> getDocumentsByTitleAndNumber(@RequestParam("title") String title, @RequestParam("number") long number) {
+		return ResponseEntity.ok()
+			.header("Cache-Control", "max-age" + "=3600")
+			.body(documents.stream().filter(document -> title
+				.equals(document
+					.getTitle()) && number == document
+				.getNumber()).collect(Collectors.toList()));
 	}
 
 	@GetMapping(produces = MediaType.TEXT_PLAIN_VALUE)
 	public String getAllTitles() {
-		return documents.stream().map(Document::getTitle).reduce((acc
-			,curr) -> String.join(",", acc, curr
-		)).orElse("");
+		return documents.stream().map(Document::getTitle)
+			.reduce((acc, curr) -> String.join(",", acc, curr))
+			.orElse("");
 	}
 
 	@PostMapping
@@ -34,7 +38,6 @@ public class DocumentService {
 
 	@DeleteMapping("/{number}")
 	public void removeDocument(@PathVariable("number") long number) {
-		documents.removeIf(document -> document
-			.getNumber() == number);
+		documents.removeIf(document -> document.getNumber() == number);
 	}
 }
