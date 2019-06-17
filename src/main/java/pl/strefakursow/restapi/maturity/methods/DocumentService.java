@@ -1,5 +1,6 @@
 package pl.strefakursow.restapi.maturity.methods;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,12 +33,19 @@ public class DocumentService {
 	}
 
 	@PostMapping
+	@ResponseStatus(HttpStatus.CREATED)
 	public void addDocument(@RequestBody Document document) {
 		documents.add(document);
 	}
 
 	@DeleteMapping("/{number}")
-	public void removeDocument(@PathVariable("number") long number) {
-		documents.removeIf(document -> document.getNumber() == number);
+	public ResponseEntity<?> removeDocument(@PathVariable("number") long number) {
+		boolean anyElementRemoved = documents
+			.removeIf(document -> document.getNumber() == number);
+		if (anyElementRemoved) {
+			return ResponseEntity.ok().build();
+		}
+		return ResponseEntity.notFound().build();
 	}
+
 }
