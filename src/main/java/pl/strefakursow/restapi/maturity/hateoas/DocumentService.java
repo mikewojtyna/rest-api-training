@@ -20,6 +20,11 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 public class DocumentService {
 	private List<Document> documents = DataFixtureUtils.initDocuments();
 
+	@GetMapping(produces = "application/json")
+	public List<Document> getAllDocumentsWithoutLinks() {
+		return documents;
+	}
+
 	@GetMapping
 	public Resources<Resource<Document>> getAllDocuments() {
 		Resources<Resource<Document>> resources = new Resources<>(
