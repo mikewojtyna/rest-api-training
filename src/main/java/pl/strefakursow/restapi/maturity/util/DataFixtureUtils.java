@@ -1,6 +1,6 @@
 package pl.strefakursow.restapi.maturity.util;
 
-import pl.strefakursow.restapi.document.Document;
+import pl.strefakursow.restapi.maturity.Document;
 import pl.strefakursow.restapi.maturity.swamp.Profile;
 
 import java.util.ArrayList;

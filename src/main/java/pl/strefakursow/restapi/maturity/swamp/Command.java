@@ -1,6 +1,6 @@
 package pl.strefakursow.restapi.maturity.swamp;
 
-import pl.strefakursow.restapi.document.Document;
+import pl.strefakursow.restapi.maturity.Document;
 
 import java.util.List;
 import java.util.Objects;

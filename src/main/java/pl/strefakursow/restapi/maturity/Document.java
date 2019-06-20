@@ -1,18 +1,10 @@
-package pl.strefakursow.restapi.document;
+package pl.strefakursow.restapi.maturity;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import java.util.List;
 
-@Entity
 public class Document {
-	@Id
-	@GeneratedValue
 	private long number;
 	private String title;
-	@ElementCollection
 	private List<String> tags;
 
 	public long getNumber() {
