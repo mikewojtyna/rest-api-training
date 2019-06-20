@@ -16,7 +16,8 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 @RestController
-@RequestMapping(value = "/api/documents", produces = {ApiVersion.V2_HAL_JSON})
+@RequestMapping(value = "/api/documents", produces = {ApiVersion.V2_HAL_JSON,
+	MediaType.ALL_VALUE})
 public class DocumentRestApiControllerV2 {
 	private static final String REL_SELF = "self";
 	private static final String REL_DOCS_BY_TITLE = "docsByTitle";

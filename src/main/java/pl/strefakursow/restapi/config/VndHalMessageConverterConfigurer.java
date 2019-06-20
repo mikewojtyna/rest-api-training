@@ -15,8 +15,7 @@ import static org.springframework.hateoas.MediaTypes.HAL_JSON;
 public class VndHalMessageConverterConfigurer {
 
 	private static final List<MediaType> SUPPORTED_MEDIA_TYPES = List
-		.of(new MediaType("application",
-			"vnd.strefakursow.v2+hal+json"), HAL_JSON);
+		.of(v(2), v(3), HAL_JSON);
 
 	@Autowired
 	public void configureVndHalMessageConverter(
@@ -34,5 +33,10 @@ public class VndHalMessageConverterConfigurer {
 				.getSupportedMediaTypes().contains(HAL_JSON))
 			.map(MappingJackson2HttpMessageConverter.class::cast)
 			.findAny();
+	}
+
+	private static MediaType v(int versionNumber) {
+		return new MediaType("application",
+			"vnd.strefakursow.v" + versionNumber + "+hal+json");
 	}
 }
