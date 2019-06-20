@@ -1,5 +1,6 @@
 package pl.strefakursow.restapi.document.service;
 
+import com.querydsl.core.types.Predicate;
 import org.springframework.stereotype.Service;
 import pl.strefakursow.restapi.document.Document;
 import pl.strefakursow.restapi.document.repository.DocumentRepository;
@@ -11,6 +12,10 @@ import java.util.stream.Stream;
 public class DocumentAppService {
 
 	private DocumentRepository documentRepository;
+
+	public Optional<Document> findByPredicate(Predicate predicate) {
+		return documentRepository.findOne(predicate);
+	}
 
 	public DocumentAppService(DocumentRepository documentRepository) {
 		this.documentRepository = documentRepository;

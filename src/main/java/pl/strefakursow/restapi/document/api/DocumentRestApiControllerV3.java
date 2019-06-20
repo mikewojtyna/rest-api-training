@@ -1,5 +1,7 @@
 package pl.strefakursow.restapi.document.api;
 
+import com.querydsl.core.types.Predicate;
+import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.hateoas.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +27,14 @@ public class DocumentRestApiControllerV3 {
 					   DtoMapper dtoMapper) {
 		this.documentService = documentService;
 		this.dtoMapper = dtoMapper;
+	}
+
+	@GetMapping(params = "query")
+	public ResponseEntity<Resource<DocumentDto>> findDocumentByPredicate(
+		@QuerydslPredicate(root = Document.class) Predicate predicate) {
+		return documentService.findByPredicate(predicate).map(this::toDto)
+			.map(this::resourceFromDto).map(this::ok)
+			.orElse(ResponseEntity.notFound().build());
 	}
 
 	@GetMapping(value = "/{number}")
